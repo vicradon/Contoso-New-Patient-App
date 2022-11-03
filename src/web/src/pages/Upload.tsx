@@ -9,6 +9,10 @@ import FileToUpload from "../components/FileToUpload";
 import { useNavigate } from "react-router-dom";
 import { buttonZone } from "./Upload.css";
 import { FullPageSpinner } from "../components/FullPageSpinner";
+// import * as dotenv from "dotenv";
+// dotenv.config();
+
+// const API_URL = process.env.REACT_APP_API_URL;
 
 function Upload() {
   const [cameraActive, setCameraActive] = useState(false);
@@ -28,16 +32,16 @@ function Upload() {
       setUploading(true);
 
       const formData = new FormData();
-      formData.append("file", fileToUpload);
+      formData.append("patient-registration-form", fileToUpload);
 
-      const res = await fetch("/api/new-patient/upload-file", {
+      const res = await fetch(`http://localhost:3001/upload`, {
         method: "POST",
         body: formData,
       });
 
       if (res.ok) {
-        const { patientId } = await res.json();
-        navigate(`/verify/${patientId}`);
+        // navigate(`/results`);
+        console.log(res);
       } else {
         console.error("Upload failed");
         const resText = await res.text();

@@ -43,6 +43,12 @@ const router = createBrowserRouter(
         loader={async ({ params }) => fetch(`/api/new-patient/${params.id}`)}
       />
       <Route
+        path="/results"
+        element={<PatientDetails />}
+        errorElement={<ErrorBoundary />}
+        loader={async () => fetch("/api/patient-details")}
+      />
+      <Route
         path="/record-saved"
         element={<RecordSaved />}
         errorElement={<ErrorBoundary />}
